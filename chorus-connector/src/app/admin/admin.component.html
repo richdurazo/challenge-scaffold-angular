@@ -1,0 +1,95 @@
+<div class="col-12 admin-container">
+  <div class="card">
+    <h5>Add a Chorus</h5>
+    <form #form="ngForm" (ngSubmit)="submitForm(form)" novalidate class="p-fluid p-formgrid grid">
+      <div class="field col-12 md:col-6">
+        <label for="chorusName">Chorus Name</label>
+        <input
+          pInputText
+          id="chorusName"
+          type="text"
+          name="name"
+          [(ngModel)]="chorus.name"
+          required
+          #name="ngModel"
+          aria-describedby="chorusNameError">
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message" id="chorusNameError">
+          <small *ngIf="name.errors?.['required']">Chorus Name is required.</small>
+        </div>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="contactEmail">Contact Email</label>
+        <input
+          id="contactEmail"
+          type="email"
+          pInputText
+          name="contactEmail"
+          [(ngModel)]="chorus.contactEmail"
+          required
+          #contactEmail="ngModel"
+          aria-describedby="contactEmailError">
+        <div *ngIf="contactEmail.invalid && (contactEmail.dirty || contactEmail.touched)" class="error-message" id="contactEmailError">
+          <small *ngIf="contactEmail.errors?.['required']">Contact Email is required.</small>
+          <small *ngIf="contactEmail.errors?.['email']">Please enter a valid email address.</small>
+        </div>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="description">Description</label>
+        <div>
+          <textarea
+            id="description"
+            rows="5"
+            required
+            cols="30"
+            pInputTextarea
+            name="description"
+            [(ngModel)]="chorus.description"
+            #description="ngModel"
+            style="width: 100%;"
+            aria-describedby="descriptionError">
+          </textarea>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error-message" id="descriptionError">
+            <small *ngIf="description.errors?.['required']">Description is required.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="city">City</label>
+        <input
+          pInputText
+          id="city"
+          type="text"
+          name="city"
+          required
+          [(ngModel)]="chorus.location.city"
+          #city="ngModel"
+          aria-describedby="cityError">
+        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="error-message" id="cityError">
+          <small *ngIf="city.errors?.['required']">City is required.</small>
+        </div>
+      </div>
+
+      <div class="field col-12 md:col-3">
+        <label for="state">State</label>
+        <input
+          name="state"
+          pInputText
+          id="state"
+          required
+          [(ngModel)]="chorus.location.state"
+          #state="ngModel"
+          aria-describedby="stateError">
+        <div *ngIf="state.invalid && (state.dirty || state.touched)" class="error-message" id="stateError">
+          <small *ngIf="state.errors?.['required']">State is required.</small>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <p-button [disabled]="!form.valid" type="submit" label="Submit" [loading]="loading"></p-button>
+      </div>
+    </form>
+  </div>
+</div>
